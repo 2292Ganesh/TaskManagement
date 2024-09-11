@@ -8,12 +8,15 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
+
 mongoose.connect('mongodb+srv://ganesh:ganesh2002@taskmanagement.cyoph.mongodb.net/task?retryWrites=true&w=majority', {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 30000 // Increase timeout to 30 seconds
 })
 .then(() => console.log('Database Connected!'))
 .catch(err => console.error('Error connecting to database:', err));
+
 
 // Route to add a task
 app.post('/addtask', (req, res) => {
